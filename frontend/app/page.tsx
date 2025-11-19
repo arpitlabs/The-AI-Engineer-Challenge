@@ -120,7 +120,7 @@ export default function Home() {
       }
 
       // Add assistant message placeholder
-      const assistantMessageId = messages.length
+      // Use functional update to get the correct index after user message is added
       setMessages(prev => [...prev, { role: 'assistant', content: '' }])
 
       let accumulatedContent = ''
@@ -134,9 +134,14 @@ export default function Home() {
         accumulatedContent += chunk
         
         // Update the assistant message with accumulated content
+        // The assistant message is always the last one we just added
         setMessages(prev => {
           const updated = [...prev]
-          updated[assistantMessageId] = { role: 'assistant', content: accumulatedContent }
+          const lastIndex = updated.length - 1
+          // Only update if the last message is an assistant message
+          if (lastIndex >= 0 && updated[lastIndex].role === 'assistant') {
+            updated[lastIndex] = { role: 'assistant', content: accumulatedContent }
+          }
           return updated
         })
       }
