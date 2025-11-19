@@ -26,6 +26,28 @@ cd frontend
 npm install
 ```
 
+2. If you're updating from a previous installation or seeing issues, clean install:
+
+```bash
+# Remove old dependencies
+rm -rf node_modules package-lock.json
+# On Windows PowerShell:
+# Remove-Item -Recurse -Force node_modules, package-lock.json
+
+# Fresh install
+npm install
+```
+
+3. After installation, address security vulnerabilities:
+
+```bash
+npm audit fix
+```
+
+This will automatically fix any security vulnerabilities that can be resolved without breaking changes.
+
+**Note**: Some deprecation warnings (like for `eslint@8.57.1`, `inflight`, `rimraf`, `glob`) are expected and come from transitive dependencies used by Next.js and ESLint. These don't affect functionality and will be resolved when the upstream packages update their dependencies. The updated `package.json` uses the latest stable versions of all direct dependencies.
+
 ## Running Locally
 
 1. Make sure the backend API is running on `http://localhost:8000` (or update the API URL in the code)
