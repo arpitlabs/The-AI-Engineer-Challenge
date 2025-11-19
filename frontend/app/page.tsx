@@ -16,6 +16,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [model, setModel] = useState('gpt-4.1-mini')
+  const [backendStatus, setBackendStatus] = useState<'checking' | 'online' | 'offline' | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   const scrollToBottom = () => {
@@ -25,6 +26,41 @@ export default function Home() {
   useEffect(() => {
     scrollToBottom()
   }, [messages])
+
+  // Check backend connection on mount
+  useEffect(() => {
+    const checkBackend = async () => {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 
+        (typeof window !== 'undefined' && window.location.hostname === 'localhost' 
+          ? 'http://localhost:8000' 
+          : '')
+      const healthEndpoint = apiUrl ? `${apiUrl}/api/health` : '/api/health'
+      
+      setBackendStatus('checking')
+      try {
+        // Create an AbortController for timeout
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 3000) // 3 second timeout
+        
+        const response = await fetch(healthEndpoint, { 
+          method: 'GET',
+          signal: controller.signal
+        })
+        
+        clearTimeout(timeoutId)
+        
+        if (response.ok) {
+          setBackendStatus('online')
+        } else {
+          setBackendStatus('offline')
+        }
+      } catch {
+        setBackendStatus('offline')
+      }
+    }
+    
+    checkBackend()
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -49,9 +85,15 @@ export default function Home() {
 
     try {
       // Determine API URL based on environment
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+      // In production (Vercel), use relative URL; in development, use localhost
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 
+        (typeof window !== 'undefined' && window.location.hostname === 'localhost' 
+          ? 'http://localhost:8000' 
+          : '')
       
-      const response = await fetch(`${apiUrl}/api/chat`, {
+      const apiEndpoint = apiUrl ? `${apiUrl}/api/chat` : '/api/chat'
+      
+      const response = await fetch(apiEndpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +141,20 @@ export default function Home() {
         })
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred')
+      let errorMessage = 'An error occurred'
+      
+      if (err instanceof TypeError && err.message.includes('fetch')) {
+        // Network error - backend likely not running or unreachable
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 
+          (typeof window !== 'undefined' && window.location.hostname === 'localhost' 
+            ? 'http://localhost:8000' 
+            : '')
+        errorMessage = `Cannot connect to backend API. Please ensure the backend is running at ${apiUrl || '/api'}. If running locally, start the backend with: uv run uvicorn api.app:app --reload`
+      } else if (err instanceof Error) {
+        errorMessage = err.message
+      }
+      
+      setError(errorMessage)
       // Remove the assistant message placeholder if error occurred
       setMessages(prev => prev.slice(0, -1))
     } finally {
@@ -163,6 +218,17 @@ export default function Home() {
           </div>
         </div>
 
+        {backendStatus === 'offline' && (
+          <div className={styles.warning}>
+            ⚠️ Backend API appears to be offline. Make sure the backend is running.
+            {typeof window !== 'undefined' && window.location.hostname === 'localhost' && (
+              <div style={{ marginTop: '0.5rem', fontSize: '0.9rem' }}>
+                Start it with: <code style={{ background: 'rgba(255,255,255,0.5)', padding: '0.2rem 0.4rem', borderRadius: '4px' }}>uv run uvicorn api.app:app --reload</code>
+              </div>
+            )}
+          </div>
+        )}
+        
         {error && (
           <div className={styles.error}>
             ⚠️ {error}
@@ -234,4 +300,5 @@ export default function Home() {
     </main>
   )
 }
+
 

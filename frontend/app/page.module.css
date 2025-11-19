@@ -87,6 +87,15 @@
   font-weight: 500;
 }
 
+.warning {
+  padding: 1rem;
+  background: #fff3e0;
+  border: 2px solid #ff9800;
+  border-radius: 8px;
+  color: #e65100;
+  font-weight: 500;
+}
+
 .chatContainer {
   display: flex;
   flex-direction: column;
@@ -297,4 +306,5 @@
     padding: 1rem;
   }
 }
+
 
