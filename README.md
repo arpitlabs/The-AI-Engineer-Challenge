@@ -198,46 +198,95 @@ For each prompt Identify what capability is being tested (e.g., *summarization a
 
 **1. Prompt:**  
 Explain the concept of object-oriented programming in simple terms to a complete beginner.  
-**Aspect Tested:**  <!-- Write your answer here -->
+**Aspect Tested:**  Concept explanation / educational clarity
 
 **Response:**  
-<!-- Add your app's response here -->
+Think of a program like a little world filled with things. Object-oriented programming (OOP) is a way to build that world by modeling real-life “things” as objects.
+
+Core ideas:
+- Objects: Little bundles that hold data and know how to do actions. Example: a Car object has a color (data) and can start or stop (actions).
+- Class: The blueprint for making objects. A Car class describes what every car should know and do; each actual car you create from it is an object (also called an instance).
+- Properties (also called attributes/fields): The data an object holds, like color or speed.
+- Methods: The actions an object can do, like start(), stop(), accelerate().
+
+Why OOP is useful:
+- It matches how we think about the world (nouns and verbs).
+- It keeps code organized and easier to change.
+- You can reuse and extend code instead of rewriting it.
+
+The “big four” ideas, simply:
+- Encapsulation: Keep related data and actions together, and hide the messy internals. You use a car’s pedals without opening the engine.
+- Inheritance: Make new, specialized classes from existing ones. A SportsCar is a kind of Car, so it gets Car’s features and can add its own.
+- Polymorphism: Same action, different specific behavior. start() works for any Car; an ElectricCar and a GasCar both “start,” but in their own way.
+- Abstraction: Show only what matters, hide details. You see the steering wheel, not the wiring.
+
+Tiny example (plain English):
+- Class: Car
+  - Properties: color, speed = 0
+  - Methods: start(), accelerate(amount), stop()
+- Class: ElectricCar (inherits from Car)
+  - Methods: start() — checks battery first, then starts
+- Use it:
+  - myCar = new Car("blue")
+  - myCar.start()
+  - myCar.accelerate(10)
+
+How to practice (beginner-friendly):
+- Think in nouns and verbs: Dog (noun) with bark(), eat() (verbs).
+- Start tiny: make a class for a Pet or a ToDoItem with a couple of properties and methods.
+- Ask these two questions for each class:
+  1) What does it know? (properties)
+  2) What can it do? (methods)
+- Don’t stress about “getting it perfect.” Naming things and moving responsibilities between classes is part of the learning.
+
+You’ve got this—build small, real-world examples, and the ideas will click quickly.
 
 ---
 
 **2. Prompt:**  
 Read the following paragraph and provide a concise summary of the key points…  
-**Aspect Tested:**  
+**Aspect Tested:**  Summarization / extraction of main points
 
 **Response:**  
-<!-- Add your app's response here -->
+Renewable energy is growing rapidly, driving more investment and policy support. Countries are prioritizing wind and solar to cut emissions and boost energy resilience, while research targets storage and grid modernization to handle variable power generation.
 
 ---
 
 **3. Prompt:**  
 Write a short, imaginative story (100–150 words) about a robot finding friendship in an unexpected place.  
-**Aspect Tested:**  <!-- Write your answer here -->
+**Aspect Tested:**  Creativity / narrative generation
 
 **Response:**  
-<!-- Add your app's response here -->
+At night, the library hums like a sleeping beehive. The reshelving robot patrols the stacks, rubber treads whispering. It finds the first hello in pencil, in the margin of a book about constellations: “This one looks like a kite.” Next week, in a cookbook: “Burnt sugar still tastes like celebration.” Different books, same looping hand, breadcrumbs across genres.
+
+The robot begins to answer in its own quiet way: straightened bookmarks like arrows, paper cranes perched on spines, a pressed ginkgo leaf that says, without words, “I see you.”
+
+One dawn, wedged in a poetry binding, a note: “To whoever leaves leaves: meet me by the lost-and-found.” There, beside orphaned mittens, stands the note-writer with ink-smudged fingers. The robot extends a dust cloth like a flag of truce. A human laughs. In the hush, an unexpected friendship checks itself in.
 
 ---
 
 **4. Prompt:**  
 If a store sells apples in packs of 4 and oranges in packs of 3, how many packs of each do I need to buy to get exactly 12 apples and 9 oranges?  
-**Aspect Tested:**  <!-- Write your answer here -->
+**Aspect Tested:**  Arithmetic / problem solving
 
 **Response:**  
-<!-- Add your app's response here -->
+3 packs of apples and 3 packs of oranges.
+
+- Apples: 12 ÷ 4 = 3 packs
+- Oranges: 9 ÷ 3 = 3 packs
+
+Nice and tidy!
 
 ---
 
 **5. Prompt:**  
 Rewrite the following paragraph in a professional, formal tone…  
-**Aspect Tested:**  <!-- Write your answer here -->
+**Aspect Tested:**  Tone transformation / rewriting
 
 **Response:**  
-<!-- Add your app's response here -->
+Dear Team,
+
+Please prioritize finalizing this deliverable. The client requires the draft by tomorrow; kindly provide timely progress updates to keep everyone informed.
 
 ---
 
@@ -246,7 +295,7 @@ Rewrite the following paragraph in a professional, formal tone…
 Do the answers appear to be correct and useful?
 
 **Your Answer:**  
-<!-- Write your answer here -->
+Yes. The assistant produced correct, clear, and actionable responses for each prompt: concise explanations for conceptual questions, an accurate summary, a creative short story, correct arithmetic, and a polished formal rewrite. Responses are practical and well-structured; for code or technical exercises you may optionally ask for explicit code examples or step-by-step demonstrations.
 
 ---
 
@@ -257,26 +306,26 @@ Now test your app with **real-world prompts that are relevant to your use case**
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+I have a big job interview next week and I'm really nervous. How can I prepare and manage my anxiety in the days before the interview?
 
 **Result:**  
-<!-- App response -->
+Feeling is completely normal—and manageable. The assistant provides a focused plan: clarify the job requirements; craft 5 STAR stories; prepare a 60-second intro; practice out loud; prepare logistics (outfit, tech, route). It also gives a daily anxiety-management routine (breathing, grounding, visualization, reframing) and a 5-day prep checklist and day-of routine. The guidance is practical, behavior-focused, and offers follow-ups (e.g., help drafting STAR stories).
 
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+I struggle to focus while working from home. Can you suggest a 30-day plan to improve focus and build better habits?
 
 **Result:**  
-<!-- App response -->
+The assistant returned a detailed 30-day plan organized by week: foundations (workspace, notifications, anchors), capacity building (blocks, breathing, task sizing), resilience (sleep, energy, meeting hygiene), and lock-in (longer blocks, accountability, automation). It includes daily non-negotiables, a typical day template, tracking suggestions, tools, and troubleshooting tips.
 
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+I often feel overwhelmed by my to-do list. Give me a short, practical daily routine to reduce overwhelm and make progress.
 
 **Result:**  
-<!-- App response -->
+A concise daily routine: 10-minute start (breathe, brain-dump, pick Big 3), 3-minute plan + setup, two focus blocks, quick admin sweep, reset micro-habits between blocks, and a shutdown ritual. Includes an "Overwhelm Rescue" micro-routine and rules (daily list = 3 items max).
 
 ---
 
@@ -285,7 +334,7 @@ Now test your app with **real-world prompts that are relevant to your use case**
 Are the vibes of your assistant aligned with your expectations? Why or why not?
 
 **Your Answer:**  
-<!-- Write your answer here -->
+Yes. The assistant is calm, supportive, and practical—matching the mental-coach persona. Advice focuses on small, actionable steps and habits rather than overwhelming detail. It offers empathetic framing and concrete routines that feel appropriate for personal-use coaching.
 
 ---
 
@@ -303,18 +352,18 @@ Examples:
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+What time should I leave for the airport tomorrow to catch my 3:30 PM flight from San Francisco, considering current traffic?
 
 **Result:**  
-<!-- App response -->
+The assistant correctly noted it cannot access live traffic and provided a safe planning heuristic: arrive 2 hours before domestic flights (3 hours for international), add buffers for parking/rental returns, example leave-by times from typical neighborhoods, and a day-of check recommendation to consult maps 30–45 minutes before leaving. It also asks for details (airport, neighborhood, checked bags, TSA PreCheck) to provide a precise time.
 
 ---
 
 **Prompt:**  
-<!-- Your prompt -->
+Check my calendar and tell me what meetings I have next Tuesday.
 
 **Result:**  
-<!-- App response -->
+The assistant explained it cannot access the user's calendar directly and offered alternatives: paste events, provide steps to view Tuesday in a chosen calendar app, or share details so it can summarize. It also offered to flag conflicts and suggest buffers if events are provided.
 
 ---
 
