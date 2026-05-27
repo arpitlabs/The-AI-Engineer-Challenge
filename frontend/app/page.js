@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 
 const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "http://localhost:8000";
+  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || ""; // default to same-origin
 
 const THINKING_PHRASES = [
   "Thinking",
